@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>link_shortener</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        .container {
+            text-align: center;
+            color: white;
+        }
+        input[type="text"]{
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        button{
+            padding: 10px 20px;
+            background-color: deepskyblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color: #2980b9;
+        }
+        #validationMessage{
+            color: white;
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+        }
+        </style>
+</head>
+<body>
+<div class="container">
+    <h1>Shorten Your Link</h1>
+    <form id="shorten-form" method="get" class="form-control">
+        <label for="original_Link"></label><input onchange="validateLink()" name="original_link" type="text" id="original_Link" placeholder="Enter yor link...">
+        <button type="submit">shorten</button>
+    </form>
+    <span id="validationMessage"></span>
+</div>
+<script>
+    function validateLink(){
+        let originalLink = document.getElementById('original_link').value;
+        let pattern = /^(ftp|http|https):\/\/[^ "]+$/;
+
+        if (pattern.test(originalLink)){
+            document.getElementById('validationMessage').innerText='';
+            //Here you can submit the form or perform further actions
+        } else {
+            document.getElementById('validationMessage').innerText = 'Please enter a valid link.';
+
+        }
+    }
+</script>
+</body>
+</html>

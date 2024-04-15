@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link_shortener</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        .container {
+            text-align: center;
+            color: white;
+        }
+        input[type="text"]{
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        button{
+            padding: 10px 20px;
+            background-color: deepskyblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color: #2980b9;
+        }
+        #validationMessage{
+            color: white;
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+        }
+        </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Shortened Link</h1>
+    <form id="shorten-form" method="get" class="form-control">
+        <label for="original_Link"></label><input onchange="validateLink()" name="original_link" type="text" id="original_Link" placeholder="Enter yor link...">
+        <button type="submit">copy</button>
+    </form>
+    <span id="validationMessage"></span>
+    <div id="qrcode"></div>
+<button onclick="downloadQRCode()">Download QR Code</button>
+
+<script>
+function downloadQRCode() {
+    const qrCodeData = document.getElementById('qrcode').querySelector('img').src;
+    const downloadLink = document.createElement('a');
+    downloadLink.href = qrCodeData;
+    downloadLink.download = 'qrcode.png';
+    downloadLink.click();
+}
+
+const qrCode = new QRCode(document.getElementById("qrcode"), {
+    text: "https://www.example.com", // متن یا لینکی که می‌خواهید به صورت QR code نشان داده شود
+    width: 200,
+    height: 200
+});
+</div>
+</body>
+</html>
